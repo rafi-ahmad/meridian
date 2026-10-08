@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ---------- Color System ---------- */
+  --color-paper: #f7f5f1;        /* warm off-white */
+  --color-paper-dim: #efece5;
+  --color-ivory: #fbfaf7;
+  --color-stone: #d8d2c4;
+  --color-stone-dark: #a99f8c;
+  --color-olive: #6b6a52;
+  --color-beige: #cbbfa9;
+  --color-charcoal: #232320;
+  --color-ink: #161614;
+  --color-black: #0a0a09;
+  --color-line: #dedad0;
+  --color-sale: #a8402f;
+
+  /* ---------- Typography ---------- */
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* ---------- Layout ---------- */
+  --breakpoint-xs: 420px;
+  --container-8xl: 96rem;
+
+  /* ---------- Easing ---------- */
+  --ease-meridian: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-paper);
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-feature-settings: "ss01" 1, "kern" 1;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-normal tracking-tight;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  a, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    @apply text-[11px] tracking-[0.22em] uppercase font-medium text-charcoal/70;
+  }
+
+  .container-meridian {
+    @apply mx-auto w-full max-w-[1680px] px-5 sm:px-8 lg:px-12;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.4s var(--ease-meridian);
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .img-hover-zoom {
+    @apply overflow-hidden;
+  }
+  .img-hover-zoom img {
+    transition: transform 1.1s var(--ease-meridian);
+  }
+  .img-hover-zoom:hover img {
+    transform: scale(1.045);
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
